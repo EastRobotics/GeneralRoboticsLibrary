@@ -10,7 +10,11 @@ the directive allows you to replace blocks of code with simpler code.  Then when
 You can then reuse those to create more complex defines like mtrs rb=lb=lf=rf.  When the compiler sees this it would substitute back in motor[rBack]=motor[lBack]=motor=[lFront]=motor[rFront], thus if you say mtrs = 60 it would set all of your motors to power level 60.
 
  #define rf motor[rFront]
+ 
  #define rb motor[rBack]
+ 
  #define lf motor[lFront]
+ 
  #define lb motor[lBack]
+ 
  #define mtrs rb=lb=lf=rf
