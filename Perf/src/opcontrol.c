@@ -33,7 +33,7 @@
 void operatorControl() {
 	while (1) {
 		delay(20);
-		printf("Opcontrol Starting!");
+		printf("Opcontrol Starting !");
 		maintest();
 	}
 }
