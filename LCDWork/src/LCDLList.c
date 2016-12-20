@@ -21,6 +21,23 @@ node* LCDList;
 
 TaskHandle LCDTask;
 
+char * strcenter(char * dest, const char * src, int len )
+{
+    char * str;
+    char *dstr;
+    int l = (len - strlen(src))/2;
+    str = (char *)src;
+    dstr = dest+l;
+    printf("%s %s %i %i ",dest,src, len, l);
+    memset(dest,' ',len);
+    *(dest+len-1) = 0;
+    while(*str != 0)
+    {
+        *dstr++=*str++;
+    }
+    return (dest);
+}
+/* Old String Center
 char * strcenter (char * str, int len)
 {
 	char * tempstr = (char *)malloc(len+1 );
@@ -42,15 +59,15 @@ char * strcenter (char * str, int len)
   }
 	return(tempstr);
 }
-
+*/
 
 node* GetNewNode(char * scrntitle, void (*action)(void * parameter))
 {
 	node* newNode = (node*)malloc(sizeof(node));
 	newNode->currScreen = (lcdOption *)malloc(sizeof(lcdOption));
 //  newNode->currScreen->displayline = strcenter(scrntitle,16);
-  strncpy(newNode->currScreen->displayline, scrntitle,16);
-//	strncpy(newNode->currScreen->displayline, strcenter(scrntitle,16),16);
+//  strncpy(newNode->currScreen->displayline, scrntitle,16);
+	strcenter(newNode->currScreen->displayline, scrntitle,16);
 	newNode->currScreen->actionfuncPtr = action;
 	newNode->nextScreen = NULL;
 	newNode->prevScreen = NULL;
@@ -144,11 +161,11 @@ void LCDRun (void * parameter)
 
 void initLCDLList()
 {
-  char *strg;
+  //char *strg;
 	lcdInit(uart1);
 	lcdClear(uart1);
 	lcdSetBacklight(uart1, true);
 	LCDTask = taskCreate(LCDRun, TASK_DEFAULT_STACK_SIZE,NULL,TASK_PRIORITY_DEFAULT);
-  strg = strcenter("test", 16);
- printf("|%s| ",strg/*,strcenter("Test", 16)*/);
+//  strg = strcenter("test", 16);
+ //printf("|%s| ",strg/*,strcenter("Test", 16)*/);
 }
